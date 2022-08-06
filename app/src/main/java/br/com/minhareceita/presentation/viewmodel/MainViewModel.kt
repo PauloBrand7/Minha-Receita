@@ -1,4 +1,4 @@
-package br.com.minhareceita.ui.main
+package br.com.minhareceita.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 

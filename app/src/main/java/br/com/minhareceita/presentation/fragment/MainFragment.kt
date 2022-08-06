@@ -1,4 +1,4 @@
-package br.com.minhareceita.ui.main
+package br.com.minhareceita.presentation.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.minhareceita.R
+import br.com.minhareceita.presentation.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 

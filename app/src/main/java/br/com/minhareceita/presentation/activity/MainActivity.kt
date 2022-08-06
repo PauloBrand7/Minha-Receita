@@ -1,8 +1,9 @@
-package br.com.minhareceita
+package br.com.minhareceita.presentation.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import br.com.minhareceita.ui.main.MainFragment
+import br.com.minhareceita.R
+import br.com.minhareceita.presentation.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
