@@ -1,14 +1,15 @@
-package br.com.minhareceita.data.model
+package br.com.minhareceita.domain.model.categories
+
 
 import com.google.gson.annotations.SerializedName
 
-data class FoodCategoryResponse(
+data class MealCategory(
     @SerializedName("idCategory")
-    val categoryId: String,
+    val id: String,
     @SerializedName("strCategory")
     val categoryName: String,
     @SerializedName("strCategoryDescription")
-    val categoryDescription: String,
+    val description: String,
     @SerializedName("strCategoryThumb")
-    val categoryImage: String
+    val image: String
 )
