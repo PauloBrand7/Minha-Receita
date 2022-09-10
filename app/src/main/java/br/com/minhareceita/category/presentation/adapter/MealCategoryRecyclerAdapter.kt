@@ -1,4 +1,4 @@
-package br.com.minhareceita.category.presentation
+package br.com.minhareceita.category.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View

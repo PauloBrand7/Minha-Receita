@@ -1,12 +1,13 @@
-package br.com.minhareceita.category.presentation
+package br.com.minhareceita.category.presentation.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
+import br.com.minhareceita.category.presentation.adapter.MealCategoryRecyclerAdapter
+import br.com.minhareceita.category.presentation.viewmodel.MealCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,7 @@ class MealCategoryActivity : AppCompatActivity() {
     }
 
     private fun initProperties() {
+        supportActionBar?.hide()
         recycleView = findViewById(R.id.categories_list)
         recycleView.layoutManager = StaggeredGridLayoutManager( 2, StaggeredGridLayoutManager.VERTICAL)
 

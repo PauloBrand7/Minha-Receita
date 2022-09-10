@@ -1,4 +1,4 @@
-package br.com.minhareceita.category.presentation
+package br.com.minhareceita.category.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

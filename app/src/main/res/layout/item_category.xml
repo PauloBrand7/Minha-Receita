@@ -14,15 +14,19 @@
             android:id="@+id/category_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_launcher_foreground" />
 
         <TextView
             android:id="@+id/category_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textAlignment="center"
-            android:maxLines="1"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="20dp"
+            android:text="Teste"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
             android:textStyle="bold" />
 
     </LinearLayout>
