@@ -10,7 +10,8 @@ class MealCategoryRepository @Inject constructor(
     private val mealCategoryApiService: MealCategoryAPI,
 ) : IMealCategoryRepository {
 
-    override suspend fun getCategories(): MealCategoriesResponse =
-        mealCategoryApiService.getCategories()
+    override suspend fun getCategories(): MealCategoriesResponse {
+        return mealCategoryApiService.getCategories()
+    }
 
 }

@@ -7,7 +7,6 @@ import br.com.minhareceita.category.domain.model.MealCategory
 import br.com.minhareceita.category.domain.usecase.MealCategoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,8 +15,8 @@ class MealCategoryViewModel @Inject constructor(
     private val useCase: MealCategoryUseCase
 ) : ViewModel() {
 
-    private lateinit var _listOfCategories: List<MealCategory>
-    val listOfCategories: MutableLiveData<List<MealCategory>> = MutableLiveData()
+    private lateinit var _listOfCategories: ArrayList<MealCategory>
+    val listOfCategories: MutableLiveData<ArrayList<MealCategory>> = MutableLiveData()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
