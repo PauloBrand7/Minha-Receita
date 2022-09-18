@@ -1,4 +1,4 @@
-package br.com.minhareceita.category.data.remote
+package br.com.minhareceita.core
 
 import br.com.minhareceita.BuildConfig
 import br.com.minhareceita.category.data.api.MealCategoryAPI
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RetrofitClient {
+object AppModule {
 
     @Singleton
     @Provides
@@ -38,9 +38,4 @@ object RetrofitClient {
         .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(gsonConverterFactory)
         .build()
-
-    @Singleton
-    @Provides
-    fun provideClient(retrofit: Retrofit): MealCategoryAPI =
-        retrofit.create(MealCategoryAPI::class.java)
 }
