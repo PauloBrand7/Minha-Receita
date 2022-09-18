@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="divider">#33000000</color>
+    <color name="card">#EEF5DB</color>
+    <color name="appbar">#B8D8D8</color>
+    <color name="listBackground">#7A9E9F</color>
+
 </resources>
