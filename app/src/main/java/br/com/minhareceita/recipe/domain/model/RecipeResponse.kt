@@ -3,7 +3,7 @@ package br.com.minhareceita.recipe.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MealRecipeResponse(
+data class RecipeResponse(
     @SerializedName("meals")
-    val meals: List<MealRecipeIngredients>
+    val recipes: ArrayList<RecipeIngredients>
 )

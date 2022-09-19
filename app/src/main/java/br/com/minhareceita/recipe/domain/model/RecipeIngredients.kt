@@ -3,7 +3,7 @@ package br.com.minhareceita.recipe.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MealRecipeIngredients(
+data class RecipeIngredients(
     @SerializedName("dateModified")
     val dateModified: Any,
     @SerializedName("idMeal")
