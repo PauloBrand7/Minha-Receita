@@ -6,8 +6,9 @@ import br.com.minhareceita.meal.domain.repository.IMealRepository
 import javax.inject.Inject
 
 class MealRepository @Inject constructor(
-    private val mealApiService: MealAPI
+    private val mealApiService: MealAPI,
 ) : IMealRepository {
+
     override suspend fun getMeals(mealCategoryName: String): MealsResponse {
         return mealApiService.getMealsByCategoryName(mealCategoryName)
     }

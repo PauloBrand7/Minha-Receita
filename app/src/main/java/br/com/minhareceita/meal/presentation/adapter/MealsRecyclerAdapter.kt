@@ -7,12 +7,13 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.minhareceita.R
-import br.com.minhareceita.category.domain.model.MealCategory
 import br.com.minhareceita.meal.domain.model.Meal
+import br.com.minhareceita.meal.presentation.listener.MealClickListener
 import com.bumptech.glide.Glide
 
 class MealsRecyclerAdapter(
-    private val mealsList: ArrayList<Meal>
+    private val mealsList: ArrayList<Meal>,
+    private val listener: MealClickListener
 ) : Adapter<MealsRecyclerAdapter.ViewHolder>(), Filterable {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -32,8 +33,7 @@ class MealsRecyclerAdapter(
             Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
             holder.categoryName.text = this.name
             holder.itemView.setOnClickListener {
-                Toast.makeText(holder.itemView.context, this.name, Toast.LENGTH_SHORT)
-                    .show()
+                listener.mealOnClick(this)
             }
         }
     }

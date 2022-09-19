@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
 import br.com.minhareceita.category.domain.model.MealCategory
 import br.com.minhareceita.category.presentation.adapter.MealCategoryRecyclerAdapter
-import br.com.minhareceita.category.presentation.listener.MealCategoryClickListener
+import br.com.minhareceita.category.presentation.listener.CategoryClickListener
 import br.com.minhareceita.category.presentation.viewmodel.MealCategoryViewModel
 import br.com.minhareceita.meal.presentation.activity.MealsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener, MealCategoryClickListener {
+class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener, CategoryClickListener {
 
     private val viewModel: MealCategoryViewModel by viewModels()
     private lateinit var recycleView: RecyclerView
@@ -54,7 +54,7 @@ class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener
 
     override fun categoryOnClick(category : MealCategory) {
         val intent = Intent(this, MealsActivity::class.java)
-        intent.putExtra("QUERY", category.categoryName)
+        intent.putExtra("CATEGORYNAME", category.categoryName)
         startActivity(intent)
     }
 

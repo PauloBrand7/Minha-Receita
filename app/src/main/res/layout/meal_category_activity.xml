@@ -37,6 +37,16 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:id="@+id/categorie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/listBackground"
+        android:text="Categorias"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AppBar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories_list"
         android:layout_width="match_parent"
@@ -44,7 +54,7 @@
         android:background="@color/listBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/AppBar" />
+        app:layout_constraintTop_toBottomOf="@id/categorie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

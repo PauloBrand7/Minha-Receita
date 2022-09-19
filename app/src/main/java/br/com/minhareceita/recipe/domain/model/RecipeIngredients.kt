@@ -1,25 +1,40 @@
 package br.com.minhareceita.recipe.domain.model
 
-
 import com.google.gson.annotations.SerializedName
 
 data class RecipeIngredients(
     @SerializedName("dateModified")
-    val dateModified: Any,
+    val dateModified: String,
     @SerializedName("idMeal")
     val idMeal: String,
     @SerializedName("strArea")
-    val strArea: String,
+    val area: String,
     @SerializedName("strCategory")
-    val strCategory: String,
+    val category: String,
     @SerializedName("strCreativeCommonsConfirmed")
-    val strCreativeCommonsConfirmed: Any,
+    val strCreativeCommonsConfirmed: String,
     @SerializedName("strDrinkAlternate")
-    val strDrinkAlternate: Any,
+    val strDrinkAlternate: String,
     @SerializedName("strImageSource")
-    val strImageSource: Any,
+    val imageSource: String,
     @SerializedName("strIngredient1")
-    val strIngredient1: String,
+    val ingredient1: String,
+    @SerializedName("strIngredient2")
+    val ingredient2: String,
+    @SerializedName("strIngredient3")
+    val ingredient3: String,
+    @SerializedName("strIngredient4")
+    val ingredient4: String,
+    @SerializedName("strIngredient5")
+    val ingredient5: String,
+    @SerializedName("strIngredient6")
+    val strIngredient6: String,
+    @SerializedName("strIngredient7")
+    val strIngredient7: String,
+    @SerializedName("strIngredient8")
+    val strIngredient8: String,
+    @SerializedName("strIngredient9")
+    val strIngredient9: String,
     @SerializedName("strIngredient10")
     val strIngredient10: String,
     @SerializedName("strIngredient11")
@@ -33,35 +48,19 @@ data class RecipeIngredients(
     @SerializedName("strIngredient15")
     val strIngredient15: String,
     @SerializedName("strIngredient16")
-    val strIngredient16: Any,
+    val strIngredient16: String,
     @SerializedName("strIngredient17")
-    val strIngredient17: Any,
+    val strIngredient17: String,
     @SerializedName("strIngredient18")
-    val strIngredient18: Any,
+    val strIngredient18: String,
     @SerializedName("strIngredient19")
-    val strIngredient19: Any,
-    @SerializedName("strIngredient2")
-    val strIngredient2: String,
+    val strIngredient19: String,
     @SerializedName("strIngredient20")
-    val strIngredient20: Any,
-    @SerializedName("strIngredient3")
-    val strIngredient3: String,
-    @SerializedName("strIngredient4")
-    val strIngredient4: String,
-    @SerializedName("strIngredient5")
-    val strIngredient5: String,
-    @SerializedName("strIngredient6")
-    val strIngredient6: String,
-    @SerializedName("strIngredient7")
-    val strIngredient7: String,
-    @SerializedName("strIngredient8")
-    val strIngredient8: String,
-    @SerializedName("strIngredient9")
-    val strIngredient9: String,
+    val strIngredient20: String,
     @SerializedName("strInstructions")
     val strInstructions: String,
     @SerializedName("strMeal")
-    val strMeal: String,
+    val mealName: String,
     @SerializedName("strMealThumb")
     val strMealThumb: String,
     @SerializedName("strMeasure1")
@@ -79,17 +78,17 @@ data class RecipeIngredients(
     @SerializedName("strMeasure15")
     val strMeasure15: String,
     @SerializedName("strMeasure16")
-    val strMeasure16: Any,
+    val strMeasure16: String,
     @SerializedName("strMeasure17")
-    val strMeasure17: Any,
+    val strMeasure17: String,
     @SerializedName("strMeasure18")
-    val strMeasure18: Any,
+    val strMeasure18: String,
     @SerializedName("strMeasure19")
-    val strMeasure19: Any,
+    val strMeasure19: String,
     @SerializedName("strMeasure2")
     val strMeasure2: String,
     @SerializedName("strMeasure20")
-    val strMeasure20: Any,
+    val strMeasure20: String,
     @SerializedName("strMeasure3")
     val strMeasure3: String,
     @SerializedName("strMeasure4")
@@ -105,7 +104,7 @@ data class RecipeIngredients(
     @SerializedName("strMeasure9")
     val strMeasure9: String,
     @SerializedName("strSource")
-    val strSource: Any,
+    val strSource: String,
     @SerializedName("strTags")
     val strTags: String,
     @SerializedName("strYoutube")

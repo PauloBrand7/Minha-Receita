@@ -20,8 +20,7 @@ class MealCategoryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val categoriesList = useCase.getCategories()
-            _listOfCategories = categoriesList.categories
+            _listOfCategories = useCase.getCategories()
             listOfCategories.postValue(_listOfCategories)
         }
     }

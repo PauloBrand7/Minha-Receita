@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.minhareceita.R
 import br.com.minhareceita.category.domain.model.MealCategory
-import br.com.minhareceita.category.presentation.listener.MealCategoryClickListener
+import br.com.minhareceita.category.presentation.listener.CategoryClickListener
 import com.bumptech.glide.Glide
 
 class MealCategoryRecyclerAdapter(
     private val categoriesList: ArrayList<MealCategory>,
-    private val listener: MealCategoryClickListener
+    private val listener: CategoryClickListener
 ) : Adapter<MealCategoryRecyclerAdapter.ViewHolder>(), Filterable {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

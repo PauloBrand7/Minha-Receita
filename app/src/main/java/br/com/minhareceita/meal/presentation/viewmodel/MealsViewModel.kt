@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.properties.ObservableProperty
 
 @HiltViewModel
 class MealsViewModel @Inject constructor(
@@ -25,8 +24,7 @@ class MealsViewModel @Inject constructor(
 
     fun getMeals(mealsName : String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val categoriesList = useCase.getMealsByCategoryName(mealsName)
-            _listOfMeals = categoriesList
+            _listOfMeals = useCase.getMealsByCategoryName(mealsName)
             listOfMeals.postValue(_listOfMeals)
         }
     }
