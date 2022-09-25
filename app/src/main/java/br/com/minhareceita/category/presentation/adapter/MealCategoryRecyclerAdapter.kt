@@ -1,5 +1,8 @@
 package br.com.minhareceita.category.presentation.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,16 +10,17 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.minhareceita.R
 import br.com.minhareceita.category.domain.model.MealCategory
-import br.com.minhareceita.category.presentation.listener.CategoryClickListener
+import br.com.minhareceita.meal.presentation.activity.MealsActivity
 import com.bumptech.glide.Glide
 
 class MealCategoryRecyclerAdapter(
-    private val categoriesList: ArrayList<MealCategory>,
-    private val listener: CategoryClickListener
+    private val context: Context,
+    private val categoriesList: ArrayList<MealCategory>
 ) : Adapter<MealCategoryRecyclerAdapter.ViewHolder>(), Filterable {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -36,7 +40,9 @@ class MealCategoryRecyclerAdapter(
             Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
             holder.categoryName.text = this.categoryName
             holder.itemView.setOnClickListener {
-                listener.categoryOnClick(this)
+                val intent = Intent(context, MealsActivity::class.java)
+                intent.putExtra("CATEGORYNAME", categoryName)
+                startActivity(context, intent, Bundle())
             }
         }
     }
@@ -55,7 +61,7 @@ class MealCategoryRecyclerAdapter(
                     val filteredList = ArrayList<MealCategory>()
                     categoriesList
                         .filter {
-                            (it.categoryName.contains(searchWord!!))
+                            (it.categoryName.lowercase().contains(searchWord.lowercase()))
                         }
                         .forEach { filteredList.add(it) }
 

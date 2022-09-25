@@ -1,6 +1,5 @@
 package br.com.minhareceita.meal.presentation.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
@@ -10,15 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
-import br.com.minhareceita.meal.domain.model.Meal
 import br.com.minhareceita.meal.presentation.adapter.MealsRecyclerAdapter
-import br.com.minhareceita.meal.presentation.listener.MealClickListener
 import br.com.minhareceita.meal.presentation.viewmodel.MealsViewModel
-import br.com.minhareceita.recipe.presentation.activity.RecipeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, MealClickListener {
+class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val viewModel: MealsViewModel by viewModels()
     private var query: String? = null
@@ -53,7 +49,7 @@ class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, MealC
     override fun onResume() {
         super.onResume()
         viewModel.listOfMeals.observe(this) { list ->
-            adapter = MealsRecyclerAdapter(list, this)
+            adapter = MealsRecyclerAdapter(this, list)
             recycleView.adapter = adapter
         }
 
@@ -69,11 +65,4 @@ class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, MealC
         adapter.filter.filter(searchWord)
         return false
     }
-
-    override fun mealOnClick(meal: Meal) {
-        val intent = Intent(this, RecipeActivity::class.java)
-        intent.putExtra("RECIPEID", meal.id)
-        startActivity(intent)
-    }
-
 }

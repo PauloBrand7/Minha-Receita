@@ -3,7 +3,7 @@ package br.com.minhareceita.recipe.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.minhareceita.recipe.domain.model.RecipeIngredients
+import br.com.minhareceita.meal.domain.model.Meal
 import br.com.minhareceita.recipe.domain.usecase.RecipesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,8 +15,8 @@ class RecipesViewModel @Inject constructor(
     private val useCase: RecipesUseCase
 ): ViewModel() {
 
-    private var _ingredients: ArrayList<RecipeIngredients> = arrayListOf()
-    val ingredients: MutableLiveData<ArrayList<RecipeIngredients>> = MutableLiveData()
+    private var _ingredients: ArrayList<Meal> = arrayListOf()
+    val ingredients: MutableLiveData<ArrayList<Meal>> = MutableLiveData()
 
     fun getRecipes(mealId : String) {
         viewModelScope.launch(Dispatchers.IO) {

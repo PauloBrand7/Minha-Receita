@@ -1,6 +1,5 @@
 package br.com.minhareceita.category.presentation.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
@@ -10,15 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
-import br.com.minhareceita.category.domain.model.MealCategory
 import br.com.minhareceita.category.presentation.adapter.MealCategoryRecyclerAdapter
-import br.com.minhareceita.category.presentation.listener.CategoryClickListener
 import br.com.minhareceita.category.presentation.viewmodel.MealCategoryViewModel
-import br.com.minhareceita.meal.presentation.activity.MealsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener, CategoryClickListener {
+class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val viewModel: MealCategoryViewModel by viewModels()
     private lateinit var recycleView: RecyclerView
@@ -47,15 +43,9 @@ class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener
         searchView.setOnQueryTextListener(this)
 
         viewModel.listOfCategories.observe(this) { list ->
-            adapter = MealCategoryRecyclerAdapter(list, this)
+            adapter = MealCategoryRecyclerAdapter(this, list)
             recycleView.adapter = adapter
         }
-    }
-
-    override fun categoryOnClick(category : MealCategory) {
-        val intent = Intent(this, MealsActivity::class.java)
-        intent.putExtra("CATEGORYNAME", category.categoryName)
-        startActivity(intent)
     }
 
     override fun onQueryTextSubmit(searchWord: String?): Boolean {

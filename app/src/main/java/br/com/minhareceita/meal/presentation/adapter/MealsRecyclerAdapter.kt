@@ -1,19 +1,27 @@
 package br.com.minhareceita.meal.presentation.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.minhareceita.R
 import br.com.minhareceita.meal.domain.model.Meal
-import br.com.minhareceita.meal.presentation.listener.MealClickListener
+import br.com.minhareceita.meal.presentation.activity.MealsActivity
+import br.com.minhareceita.recipe.presentation.activity.RecipeActivity
 import com.bumptech.glide.Glide
 
 class MealsRecyclerAdapter(
-    private val mealsList: ArrayList<Meal>,
-    private val listener: MealClickListener
+    private val context: Context,
+    private val mealsList: ArrayList<Meal>
 ) : Adapter<MealsRecyclerAdapter.ViewHolder>(), Filterable {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,7 +41,9 @@ class MealsRecyclerAdapter(
             Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
             holder.categoryName.text = this.name
             holder.itemView.setOnClickListener {
-                listener.mealOnClick(this)
+                val intent = Intent(context, RecipeActivity::class.java)
+                intent.putExtra("RECIPEID", id)
+                startActivity(context, intent, Bundle())
             }
         }
     }
@@ -52,7 +62,7 @@ class MealsRecyclerAdapter(
                     val filteredList = ArrayList<Meal>()
                     mealsList
                         .filter {
-                            (it.name.contains(searchWord))
+                            (it.name.lowercase().contains(searchWord.lowercase()))
                         }
                         .forEach { filteredList.add(it) }
 

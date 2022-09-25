@@ -22,7 +22,7 @@ class RecipeActivity : AppCompatActivity() {
     private lateinit var fourthIngredient: TextView
     private lateinit var fifthIngredient: TextView
     private lateinit var prepare: TextView
-    private lateinit var image: ImageView
+    private lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class RecipeActivity : AppCompatActivity() {
     private fun initProperties() {
         supportActionBar?.hide()
         title = findViewById(R.id.recipe_title)
-        image = findViewById(R.id.recipe_image)
+        imageView = findViewById(R.id.recipe_image)
         firstIngredient = findViewById(R.id.ingredient1)
         secondIngredient = findViewById(R.id.ingredient2)
         thirdIngredient = findViewById(R.id.ingredient3)
@@ -50,16 +50,16 @@ class RecipeActivity : AppCompatActivity() {
     }
 
     private fun fillRecipe() {
-        viewModel.ingredients.observe(this) { recipe ->
-            recipe[0].apply {
-                title.text = mealName
-                Glide.with(this@RecipeActivity).load(strMealThumb).into(image)
+        viewModel.ingredients.observe(this) { meal ->
+            meal[0].apply {
+                title.text = name
+                Glide.with(this@RecipeActivity).load(image).into(imageView)
                 firstIngredient.text = ingredient1
                 secondIngredient.text = ingredient2
                 thirdIngredient.text = ingredient3
                 fourthIngredient.text = ingredient4
                 fifthIngredient.text = ingredient5
-                prepare.text = strInstructions
+                prepare.text = instructions
             }
         }
     }
