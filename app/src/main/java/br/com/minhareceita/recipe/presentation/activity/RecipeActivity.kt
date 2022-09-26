@@ -16,11 +16,6 @@ class RecipeActivity : AppCompatActivity() {
     private val viewModel: RecipesViewModel by viewModels()
     private var query: String? = null
     private lateinit var title: TextView
-    private lateinit var firstIngredient: TextView
-    private lateinit var secondIngredient: TextView
-    private lateinit var thirdIngredient: TextView
-    private lateinit var fourthIngredient: TextView
-    private lateinit var fifthIngredient: TextView
     private lateinit var prepare: TextView
     private lateinit var imageView: ImageView
 
@@ -34,11 +29,6 @@ class RecipeActivity : AppCompatActivity() {
         supportActionBar?.hide()
         title = findViewById(R.id.recipe_title)
         imageView = findViewById(R.id.recipe_image)
-        firstIngredient = findViewById(R.id.ingredient1)
-        secondIngredient = findViewById(R.id.ingredient2)
-        thirdIngredient = findViewById(R.id.ingredient3)
-        fourthIngredient = findViewById(R.id.ingredient4)
-        fifthIngredient = findViewById(R.id.ingredient5)
         prepare = findViewById(R.id.prepare)
         query = intent.getStringExtra("RECIPEID")
     }
@@ -54,11 +44,6 @@ class RecipeActivity : AppCompatActivity() {
             meal[0].apply {
                 title.text = name
                 Glide.with(this@RecipeActivity).load(image).into(imageView)
-                firstIngredient.text = ingredient1
-                secondIngredient.text = ingredient2
-                thirdIngredient.text = ingredient3
-                fourthIngredient.text = ingredient4
-                fifthIngredient.text = ingredient5
                 prepare.text = instructions
             }
         }
