@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "br.com.minhareceita"
-        minSdk 25
+        minSdk 31
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
     }
 }
 

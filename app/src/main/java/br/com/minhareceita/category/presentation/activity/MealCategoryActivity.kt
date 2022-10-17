@@ -3,48 +3,46 @@ package br.com.minhareceita.category.presentation.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
 import br.com.minhareceita.category.presentation.adapter.MealCategoryRecyclerAdapter
 import br.com.minhareceita.category.presentation.viewmodel.MealCategoryViewModel
+import br.com.minhareceita.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val viewModel: MealCategoryViewModel by viewModels()
-    private lateinit var recycleView: RecyclerView
-    private lateinit var searchView: SearchView
-    private lateinit var title: TextView
+    private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MealCategoryRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.meal_category_activity)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initProperties()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.listOfCategories.observe(this) { list ->
+            adapter.updateList(list)
+        }
     }
 
     private fun initProperties() {
         supportActionBar?.hide()
-        title = findViewById(R.id.title_appbar)
-
-        recycleView = findViewById(R.id.categories_list)
-        recycleView.layoutManager = StaggeredGridLayoutManager( 2, StaggeredGridLayoutManager.VERTICAL)
-
-        searchView = findViewById(R.id.category_search)
-        searchView.setOnSearchClickListener {
-            title.visibility = View.GONE
-        }
-
-        searchView.setOnQueryTextListener(this)
-
-        viewModel.listOfCategories.observe(this) { list ->
-            adapter = MealCategoryRecyclerAdapter(this, list)
-            recycleView.adapter = adapter
+        binding.backButton.visibility = View.GONE
+        adapter = MealCategoryRecyclerAdapter(this)
+        binding.apply {
+            search.queryHint = getString(R.string.search_categories_text)
+            search.setOnQueryTextListener(this@MealCategoryActivity)
+            contentList.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            contentList.adapter = adapter
         }
     }
 

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Minha Receita</string>
     <string name="title_minha_receita">Minha Receita</string>
+    <string name="search_categories_text">Buscar categorias</string>
+    <string name="search_meals_text">Buscar refeições</string>
+    <string name="txt_youtube">Acesse a receita no youtube</string>
+    <string name="txt_ingredientes">Ingredientes:</string>
+    <string name="txt_modo_de_preparo">Modo de Preparo:</string>
 </resources>

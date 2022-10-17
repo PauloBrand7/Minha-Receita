@@ -15,21 +15,32 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.minhareceita.R
 import br.com.minhareceita.meal.domain.model.Meal
-import br.com.minhareceita.meal.presentation.activity.MealsActivity
-import br.com.minhareceita.recipe.presentation.activity.RecipeActivity
+import br.com.minhareceita.mealDetails.presentation.activity.MealDetailsActivity
 import com.bumptech.glide.Glide
 
 class MealsRecyclerAdapter(
-    private val context: Context,
-    private val mealsList: ArrayList<Meal>
+    private val context: Context
 ) : Adapter<MealsRecyclerAdapter.ViewHolder>(), Filterable {
+
+    companion object {
+        const val TAG = "RECIPEID"
+    }
+
+    private var mealsList: ArrayList<Meal> = arrayListOf()
+    private var filteredMealsList: ArrayList<Meal> = arrayListOf()
+
+    fun updateList(list: ArrayList<Meal>) {
+        mealsList = list
+        filteredMealsList = list
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val categoryName: TextView = view.findViewById(R.id.category_name)
         val categoryImage: ImageView = view.findViewById(R.id.category_image)
     }
 
-    private var filteredMealsList = mealsList
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
@@ -41,8 +52,8 @@ class MealsRecyclerAdapter(
             Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
             holder.categoryName.text = this.name
             holder.itemView.setOnClickListener {
-                val intent = Intent(context, RecipeActivity::class.java)
-                intent.putExtra("RECIPEID", id)
+                val intent = Intent(context, MealDetailsActivity::class.java)
+                intent.putExtra(TAG, id)
                 startActivity(context, intent, Bundle())
             }
         }

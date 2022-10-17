@@ -28,7 +28,7 @@
             android:exported="true">
         </activity>
 
-        <activity android:name=".recipe.presentation.activity.RecipeActivity"
+        <activity android:name=".mealDetails.presentation.activity.MealDetailsActivity"
             android:exported="true">
         </activity>
 
