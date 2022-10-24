@@ -15,8 +15,8 @@ class MealCategoryViewModel @Inject constructor(
     private val useCase: MealCategoryUseCase
 ) : ViewModel() {
 
-    private lateinit var _listOfCategories: ArrayList<MealCategory>
-    val listOfCategories: MutableLiveData<ArrayList<MealCategory>> = MutableLiveData()
+    private lateinit var _listOfCategories: List<MealCategory>
+    val listOfCategories: MutableLiveData<List<MealCategory>> = MutableLiveData()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

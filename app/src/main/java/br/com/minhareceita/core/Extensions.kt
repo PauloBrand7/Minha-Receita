@@ -28,9 +28,9 @@ fun Meal.details(): ArrayList<String?> {
     )
 }
 
-fun String?.concatMeasure(measure: String?): String? {
-    if (!this.isNullOrEmpty() && !measure.isNullOrEmpty()) {
-        return "- $measure $this"
+fun String?.concatMeasure(ingredient: String?): String? {
+    takeIf { (!this.isNullOrEmpty() && !ingredient.isNullOrEmpty()) }?.let {
+        return "- $this $ingredient"
     }
     return null
 }

@@ -7,7 +7,7 @@ import javax.inject.Inject
 class MealDetailsUseCase @Inject constructor(
     private val repository: MealDetailsRepository
 ) {
-    suspend fun getRecipesById(recipeId: String): ArrayList<Meal> {
+    suspend fun getRecipesById(recipeId: String): List<Meal> {
         return repository.getRecipes(recipeId).meals
     }
 }

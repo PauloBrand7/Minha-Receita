@@ -15,17 +15,14 @@ class MealsViewModel @Inject constructor(
     private val useCase: MealsUseCase
 ) : ViewModel() {
 
-    private var _listOfMeals: ArrayList<Meal> = arrayListOf()
-    val listOfMeals: MutableLiveData<ArrayList<Meal>> = MutableLiveData()
+    var mealsName: String = ""
+    val meals: MutableLiveData<List<Meal>> = MutableLiveData()
+    private var _meals: List<Meal> = listOf()
 
-//    init {
-//        getMeals()
-//    }
-
-    fun getMeals(mealsName : String) {
+    init {
         viewModelScope.launch(Dispatchers.IO) {
-            _listOfMeals = useCase.getMealsByCategoryName(mealsName)
-            listOfMeals.postValue(_listOfMeals)
+            _meals = useCase.getMealsByCategoryName(mealsName)
+            meals.postValue(_meals)
         }
     }
 }

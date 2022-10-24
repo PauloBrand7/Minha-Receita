@@ -19,7 +19,6 @@ class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private val viewModel: MealsViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MealsRecyclerAdapter
-    private lateinit var query: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +41,16 @@ class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             contentList.adapter = adapter
             search.setOnQueryTextListener(this@MealsActivity)
         }
-
-        query = intent.getStringExtra(MealCategoryRecyclerAdapter.TAG).toString()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.listOfMeals.observe(this) { list ->
-            adapter.updateList(list)
+        viewModel.apply {
+            mealsName = intent.getStringExtra(MealCategoryRecyclerAdapter.TAG).toString()
+            meals.observe(this@MealsActivity) { list ->
+                adapter.updateList(list)
+            }
         }
-
-        query.let { viewModel.getMeals(it) }
     }
 
     override fun onQueryTextSubmit(searchWord: String?): Boolean {

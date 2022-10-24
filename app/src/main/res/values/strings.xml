@@ -5,5 +5,7 @@
     <string name="search_meals_text">Buscar refeições</string>
     <string name="txt_youtube">Acesse a receita no youtube</string>
     <string name="txt_ingredientes">Ingredientes:</string>
+    <string name="txt_area">Area de Origem: </string>
     <string name="txt_modo_de_preparo">Modo de Preparo:</string>
+    <string name="txt_network_error">Conexão com a internet indisponível. Verifique sua rede e tente novamente!</string>
 </resources>

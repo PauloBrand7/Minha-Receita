@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/material_dynamic_neutral_variant95">
@@ -75,23 +74,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recipe_title" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/youtube_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/white"
-                android:layout_margin="10dp"
-                android:text="@string/txt_youtube"
-                android:textColor="@color/black"
-                android:fontFamily="@font/coming_soon"
-                android:textAllCaps="false"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="90dp"
+                android:layout_height="55dp"
+                android:background="@drawable/ic_youtube"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recipe_image" />
 
             <TextView
+                android:id="@+id/area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/txt_area"
+                android:fontFamily="@font/coming_soon"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recipe_image" />
+
+            <TextView
                 android:id="@+id/ingredients"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/txt_ingredientes"
@@ -99,7 +104,7 @@
                 android:textAlignment="textStart"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/youtube_button" />
+                app:layout_constraintTop_toBottomOf="@id/area" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ingredients_list"

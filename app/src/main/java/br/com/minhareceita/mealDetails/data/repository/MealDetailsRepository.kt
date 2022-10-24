@@ -1,7 +1,7 @@
 package br.com.minhareceita.mealDetails.data.repository
 
-import br.com.minhareceita.mealDetails.data.api.MealDetailsAPI
 import br.com.minhareceita.meal.domain.model.MealsResponse
+import br.com.minhareceita.mealDetails.data.api.MealDetailsAPI
 import br.com.minhareceita.mealDetails.domain.repository.IMealDetailsRepository
 import javax.inject.Inject
 

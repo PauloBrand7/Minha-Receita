@@ -15,10 +15,11 @@ class MealDetailsViewModel @Inject constructor(
     private val useCase: MealDetailsUseCase
 ): ViewModel() {
 
-    private var _ingredients: ArrayList<Meal> = arrayListOf()
-    val ingredients: MutableLiveData<ArrayList<Meal>> = MutableLiveData()
+    var mealId: String = ""
+    private var _ingredients: List<Meal> = arrayListOf()
+    val ingredients: MutableLiveData<List<Meal>> = MutableLiveData()
 
-    fun getRecipes(mealId : String) {
+    init {
         viewModelScope.launch(Dispatchers.IO) {
             _ingredients = useCase.getRecipesById(mealId)
             ingredients.postValue(_ingredients)

@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
 import br.com.minhareceita.category.presentation.adapter.MealCategoryRecyclerAdapter
@@ -29,8 +30,20 @@ class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener
     override fun onResume() {
         super.onResume()
         viewModel.listOfCategories.observe(this) { list ->
+            binding.apply {
+                if (list.isEmpty()) {
+                    contentList.visibility = View.GONE
+                    iconNetwork.visibility = View.VISIBLE
+                    txtNetwork.visibility = View.VISIBLE
+                } else {
+                    contentList.visibility = View.VISIBLE
+                    iconNetwork.visibility = View.GONE
+                    txtNetwork.visibility = View.GONE
+                }
+            }
             adapter.updateList(list)
         }
+
     }
 
     private fun initProperties() {

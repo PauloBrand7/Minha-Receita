@@ -12,7 +12,7 @@ class MealDetailsRecyclerAdapter: Adapter<MealDetailsRecyclerAdapter.ViewHolder>
 
     private var meal: ArrayList<String?> = arrayListOf()
 
-    fun updateList(list: ArrayList<String?>) {
+    fun updateList(list: List<String?>) {
         list.forEach {
             if(!it.isNullOrEmpty()) {
                 meal.add(it)

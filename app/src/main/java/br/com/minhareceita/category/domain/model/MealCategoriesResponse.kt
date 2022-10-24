@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class MealCategoriesResponse(
     @SerializedName("categories")
-    val categories: ArrayList<MealCategory>
+    val categories: List<MealCategory>
 )

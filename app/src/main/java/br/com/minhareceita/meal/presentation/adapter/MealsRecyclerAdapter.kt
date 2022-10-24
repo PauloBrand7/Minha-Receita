@@ -26,12 +26,12 @@ class MealsRecyclerAdapter(
         const val TAG = "RECIPEID"
     }
 
-    private var mealsList: ArrayList<Meal> = arrayListOf()
-    private var filteredMealsList: ArrayList<Meal> = arrayListOf()
+    private var meals: List<Meal> = listOf()
+    private var filteredMeals: List<Meal> = listOf()
 
-    fun updateList(list: ArrayList<Meal>) {
-        mealsList = list
-        filteredMealsList = list
+    fun updateList(list: List<Meal>) {
+        filteredMeals = list
+        meals = list
         notifyDataSetChanged()
     }
 
@@ -41,14 +41,13 @@ class MealsRecyclerAdapter(
     }
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        filteredMealsList[position].apply {
+        filteredMeals[position].apply {
             Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
             holder.categoryName.text = this.name
             holder.itemView.setOnClickListener {
@@ -59,7 +58,7 @@ class MealsRecyclerAdapter(
         }
     }
 
-    override fun getItemCount(): Int = filteredMealsList.size
+    override fun getItemCount(): Int = filteredMeals.size
 
     override fun getFilter(): Filter {
 
@@ -67,27 +66,22 @@ class MealsRecyclerAdapter(
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val searchWord = constraint?.toString() ?: ""
 
-                filteredMealsList = if (searchWord.isEmpty()) {
-                    mealsList
-                } else {
-                    val filteredList = ArrayList<Meal>()
-                    mealsList
-                        .filter {
-                            (it.name.lowercase().contains(searchWord.lowercase()))
-                        }
-                        .forEach { filteredList.add(it) }
-
-                    filteredList
+                if (searchWord.isEmpty()) {
+                    return FilterResults().apply { values = meals }
                 }
 
-                return FilterResults().apply { values = filteredMealsList }
+                return FilterResults().apply {
+                    values = filteredMeals.filter {
+                        (it.name.lowercase().contains(searchWord.lowercase()))
+                    }
+                }
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredMealsList = if (results?.values == null) {
-                    mealsList
-                } else {
+                filteredMeals = if (results?.values != null) {
                     results.values as ArrayList<Meal>
+                } else {
+                    meals
                 }
                 notifyDataSetChanged()
             }

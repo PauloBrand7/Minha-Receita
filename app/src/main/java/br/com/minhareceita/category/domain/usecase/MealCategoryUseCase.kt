@@ -8,7 +8,7 @@ import javax.inject.Inject
 class MealCategoryUseCase @Inject constructor(
     private val repository: MealCategoryRepository
 ) {
-    suspend fun getCategories(): ArrayList<MealCategory> {
+    suspend fun getCategories(): List<MealCategory> {
         return repository.getCategories().categories
     }
 }

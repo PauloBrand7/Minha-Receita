@@ -11,14 +11,14 @@
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/drawable/ic_arrow_back.xml" value="0.3235" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/drawable/ic_food_svgrepo_com.xml" value="0.255" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/font/coming_soon.xml" value="0.3927083333333333" />
-        <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/activity_main.xml" value="0.4203703703703704" />
+        <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/item_category.xml" value="0.33" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/item_ingredient.xml" value="0.5" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/main_activity.xml" value="0.26979166666666665" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/main_fragment.xml" value="0.3625" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/meal_activity.xml" value="0.3625" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/meal_category_activity.xml" value="0.33" />
-        <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/meal_detail_activity.xml" value="0.3625" />
+        <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/meal_detail_activity.xml" value="0.5" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/recipe_activity.xml" value="0.33" />
         <entry key="..\:/Projetos/MinhaReceita/app/src/main/res/layout/splash_screen.xml" value="0.33" />
       </map>

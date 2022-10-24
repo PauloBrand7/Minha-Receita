@@ -3,9 +3,11 @@ package br.com.minhareceita.mealDetails.presentation.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.minhareceita.R
 import br.com.minhareceita.core.details
 import br.com.minhareceita.databinding.MealDetailActivityBinding
 import br.com.minhareceita.meal.presentation.adapter.MealsRecyclerAdapter
@@ -21,8 +23,6 @@ class MealDetailsActivity : AppCompatActivity() {
     private val viewModel: MealDetailsViewModel by viewModels()
     private lateinit var binding: MealDetailActivityBinding
     private var adapter = MealDetailsRecyclerAdapter()
-    private var query: String = ""
-    private var youtubeLink = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,35 +38,39 @@ class MealDetailsActivity : AppCompatActivity() {
                 LinearLayoutManager(this@MealDetailsActivity, LinearLayoutManager.VERTICAL, false)
             ingredientsList.adapter = adapter
         }
-        query = intent.getStringExtra(MealsRecyclerAdapter.TAG).toString()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getRecipes(query)
         fillRecipe()
-
-        binding.youtubeButton.setOnClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(youtubeLink)
-                )
-            )
-        }
     }
 
     private fun fillRecipe() {
-        viewModel.ingredients.observe(this) { meal ->
-            meal[0].apply {
-                adapter.updateList(this.details())
-                binding.recipeTitle.text = name
-                Glide.with(this@MealDetailsActivity).load(image).into(binding.recipeImage)
-                binding.prepare.text = instructions
-                if (youtube != null) {
-                    youtubeLink = youtube
+        viewModel.apply {
+            mealId = intent.getStringExtra(MealsRecyclerAdapter.TAG).toString()
+
+            ingredients.observe(this@MealDetailsActivity) { meal ->
+                meal[0].apply {
+                    adapter.updateList(this.details())
+                    binding.recipeTitle.text = name
+                    Glide.with(this@MealDetailsActivity).load(image).into(binding.recipeImage)
+                    binding.prepare.text = instructions
+                    binding.area.text = getString(R.string.txt_area) + area
+                    binding.youtubeButton.setOnClickListener {
+                        if (youtube != null) {
+                            startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse(youtube)
+                                )
+                            )
+                        } else {
+                            binding.youtubeButton.visibility = View.GONE
+                        }
+                    }
                 }
             }
+
         }
     }
 }

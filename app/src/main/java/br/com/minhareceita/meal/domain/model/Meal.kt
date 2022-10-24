@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class Meal(
     @SerializedName("idMeal")
-    val id: String,
+    var id: String,
     @SerializedName("strMeal")
-    val name: String,
+    var name: String,
     @SerializedName("strMealThumb")
-    val image: String,
+    var image: String,
     @SerializedName("dateModified")
     val dateModified: String?,
     @SerializedName("strArea")

@@ -7,7 +7,7 @@ import javax.inject.Inject
 class MealsUseCase @Inject constructor(
     private val repository: MealRepository
 ) {
-    suspend fun getMealsByCategoryName(mealCategoryName: String): ArrayList<Meal> {
+    suspend fun getMealsByCategoryName(mealCategoryName: String): List<Meal> {
         return repository.getMeals(mealCategoryName).meals
     }
 }

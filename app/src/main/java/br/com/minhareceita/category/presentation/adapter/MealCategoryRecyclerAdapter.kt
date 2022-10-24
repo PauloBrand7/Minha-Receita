@@ -19,16 +19,26 @@ import br.com.minhareceita.meal.presentation.activity.MealsActivity
 import com.bumptech.glide.Glide
 
 class MealCategoryRecyclerAdapter(
-    private val context: Context,
-    private val categoriesList: ArrayList<MealCategory>
+    private val context: Context
 ) : Adapter<MealCategoryRecyclerAdapter.ViewHolder>(), Filterable {
+
+    companion object {
+        const val TAG = "CATEGORYNAME"
+    }
+
+    private var categories = listOf<MealCategory>()
+    private var filteredCategories: List<MealCategory> = listOf()
+
+    fun updateList(list: List<MealCategory>) {
+        filteredCategories = list
+        categories = list
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val categoryName: TextView = view.findViewById(R.id.category_name)
         val categoryImage: ImageView = view.findViewById(R.id.category_image)
     }
-
-    private var filteredCategoriesList = categoriesList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
@@ -36,18 +46,18 @@ class MealCategoryRecyclerAdapter(
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        filteredCategoriesList[position].apply {
+        filteredCategories[position].apply {
             Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
             holder.categoryName.text = this.categoryName
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, MealsActivity::class.java)
-                intent.putExtra("CATEGORYNAME", categoryName)
+                intent.putExtra(TAG, categoryName)
                 startActivity(context, intent, Bundle())
             }
         }
     }
 
-    override fun getItemCount(): Int = filteredCategoriesList.size
+    override fun getItemCount(): Int = filteredCategories.size
 
     override fun getFilter(): Filter {
 
@@ -55,27 +65,22 @@ class MealCategoryRecyclerAdapter(
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val searchWord = constraint?.toString() ?: ""
 
-                filteredCategoriesList = if (searchWord.isEmpty()) {
-                    categoriesList
-                } else {
-                    val filteredList = ArrayList<MealCategory>()
-                    categoriesList
-                        .filter {
-                            (it.categoryName.lowercase().contains(searchWord.lowercase()))
-                        }
-                        .forEach { filteredList.add(it) }
-
-                    filteredList
+                if (searchWord.isEmpty()) {
+                    return FilterResults().apply { values = categories }
                 }
 
-                return FilterResults().apply { values = filteredCategoriesList }
+                return FilterResults().apply {
+                    values = filteredCategories.filter {
+                        (it.categoryName.lowercase().contains(searchWord.lowercase()))
+                    }
+                }
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredCategoriesList = if (results?.values == null) {
-                    categoriesList
-                } else {
+                filteredCategories = if (results?.values != null) {
                     results.values as ArrayList<MealCategory>
+                } else {
+                    categories
                 }
                 notifyDataSetChanged()
             }
