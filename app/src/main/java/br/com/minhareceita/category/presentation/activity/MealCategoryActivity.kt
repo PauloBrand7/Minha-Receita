@@ -30,17 +30,6 @@ class MealCategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener
     override fun onResume() {
         super.onResume()
         viewModel.listOfCategories.observe(this) { list ->
-            binding.apply {
-                if (list.isEmpty()) {
-                    contentList.visibility = View.GONE
-                    iconNetwork.visibility = View.VISIBLE
-                    txtNetwork.visibility = View.VISIBLE
-                } else {
-                    contentList.visibility = View.VISIBLE
-                    iconNetwork.visibility = View.GONE
-                    txtNetwork.visibility = View.GONE
-                }
-            }
             adapter.updateList(list)
         }
 
