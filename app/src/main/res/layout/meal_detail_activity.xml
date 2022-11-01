@@ -79,7 +79,7 @@
                 android:layout_width="90dp"
                 android:layout_height="55dp"
                 android:background="@drawable/ic_youtube"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/meal_image" />
 

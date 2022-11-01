@@ -49,17 +49,17 @@ class MealDetailsActivity : AppCompatActivity() {
 
     private fun fillMealDetails() {
         viewModel.mealId = intent.getStringExtra(MealsRecyclerAdapter.TAG).toString()
-        viewModel.mealDetails.observe(this@MealDetailsActivity) {
-            it.meals[0].apply {
+        viewModel.mealDetails.observe(this@MealDetailsActivity) { meal ->
+            meal.meals[0].apply {
                 Glide.with(this@MealDetailsActivity).load(image).into(binding.mealImage)
-                adapter.updateList(details())
                 binding.prepare.text = instructions
                 binding.area.text = getString(R.string.txt_area) + area
                 binding.mealTitle.text = name
                 youtube?.apply {
-                    binding.youtubeButton.visibility = View.GONE
+                    binding.youtubeButton.visibility = View.VISIBLE
                     youtubeUri = this
                 }
+                adapter.updateList(details())
             }
         }
     }
