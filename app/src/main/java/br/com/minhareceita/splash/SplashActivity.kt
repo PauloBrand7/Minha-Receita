@@ -1,12 +1,11 @@
 package br.com.minhareceita.splash
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import br.com.minhareceita.category.presentation.activity.MealCategoryActivity
+import br.com.minhareceita.category.presentation.MealCategoryActivity
 import br.com.minhareceita.databinding.SplashScreenBinding
 
 class SplashActivity: AppCompatActivity() {

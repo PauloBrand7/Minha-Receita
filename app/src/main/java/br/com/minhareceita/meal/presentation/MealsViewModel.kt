@@ -1,4 +1,4 @@
-package br.com.minhareceita.meal.presentation.viewmodel
+package br.com.minhareceita.meal.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,9 +15,9 @@ class MealsViewModel @Inject constructor(
     private val useCase: MealsUseCase
 ) : ViewModel() {
 
-    var mealsName: String = ""
+    var mealsName = ""
     val meals: MutableLiveData<List<Meal>> = MutableLiveData()
-    private var _meals: List<Meal> = listOf()
+    private var _meals = listOf<Meal>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

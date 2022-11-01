@@ -1,15 +1,12 @@
-package br.com.minhareceita.category.presentation.activity
+package br.com.minhareceita.category.presentation
 
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
-import br.com.minhareceita.category.presentation.adapter.MealCategoryRecyclerAdapter
-import br.com.minhareceita.category.presentation.viewmodel.MealCategoryViewModel
 import br.com.minhareceita.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,4 +1,4 @@
-package br.com.minhareceita.meal.presentation.activity
+package br.com.minhareceita.meal.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -7,10 +7,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import br.com.minhareceita.R
-import br.com.minhareceita.category.presentation.adapter.MealCategoryRecyclerAdapter
+import br.com.minhareceita.category.presentation.MealCategoryRecyclerAdapter
 import br.com.minhareceita.databinding.ActivityMainBinding
-import br.com.minhareceita.meal.presentation.adapter.MealsRecyclerAdapter
-import br.com.minhareceita.meal.presentation.viewmodel.MealsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

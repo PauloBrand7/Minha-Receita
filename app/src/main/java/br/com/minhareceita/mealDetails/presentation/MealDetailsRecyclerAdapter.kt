@@ -1,4 +1,4 @@
-package br.com.minhareceita.mealDetails.presentation.adapter
+package br.com.minhareceita.mealDetails.presentation
 
 import android.view.LayoutInflater
 import android.view.View
