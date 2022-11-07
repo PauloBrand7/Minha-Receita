@@ -35,11 +35,6 @@ class MealCategoryRecyclerAdapter(
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val categoryName: TextView = view.findViewById(R.id.category_name)
-        val categoryImage: ImageView = view.findViewById(R.id.category_image)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
@@ -47,8 +42,8 @@ class MealCategoryRecyclerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         filteredCategories[position].apply {
-            Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
-            holder.categoryName.text = this.categoryName
+            Glide.with(holder.itemView).load(image).into(holder.categoryImage)
+            holder.categoryName.text = categoryName
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, MealsActivity::class.java)
                 intent.putExtra(TAG, categoryName)
@@ -77,13 +72,14 @@ class MealCategoryRecyclerAdapter(
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredCategories = if (results?.values != null) {
-                    results.values as ArrayList<MealCategory>
-                } else {
-                    categories
-                }
+                filteredCategories = results?.values?.let { it as List<MealCategory> } ?: categories
                 notifyDataSetChanged()
             }
         }
+    }
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val categoryName: TextView = view.findViewById(R.id.category_name)
+        val categoryImage: ImageView = view.findViewById(R.id.category_image)
     }
 }

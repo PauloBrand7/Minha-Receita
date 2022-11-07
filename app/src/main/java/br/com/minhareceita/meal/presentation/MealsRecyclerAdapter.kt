@@ -26,20 +26,14 @@ class MealsRecyclerAdapter(
         const val TAG = "RECIPEID"
     }
 
-    private var meals: List<Meal> = listOf()
-    private var filteredMeals: List<Meal> = listOf()
+    private var meals = listOf<Meal>()
+    private var filteredMeals = listOf<Meal>()
 
     fun updateList(list: List<Meal>) {
         filteredMeals = list
         meals = list
         notifyDataSetChanged()
     }
-
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val categoryName: TextView = view.findViewById(R.id.category_name)
-        val categoryImage: ImageView = view.findViewById(R.id.category_image)
-    }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
@@ -48,8 +42,8 @@ class MealsRecyclerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         filteredMeals[position].apply {
-            Glide.with(holder.itemView).load(this.image).into(holder.categoryImage)
-            holder.categoryName.text = this.name
+            Glide.with(holder.itemView).load(image).into(holder.categoryImage)
+            holder.categoryName.text = name
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, MealDetailsActivity::class.java)
                 intent.putExtra(TAG, id)
@@ -78,13 +72,14 @@ class MealsRecyclerAdapter(
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredMeals = if (results?.values != null) {
-                    results.values as ArrayList<Meal>
-                } else {
-                    meals
-                }
+                filteredMeals = results?.values?.let { it as List<Meal>} ?: meals
                 notifyDataSetChanged()
             }
         }
+    }
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val categoryName: TextView = view.findViewById(R.id.category_name)
+        val categoryImage: ImageView = view.findViewById(R.id.category_image)
     }
 }

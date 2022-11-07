@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.minhareceita.R
 import br.com.minhareceita.core.details
 import br.com.minhareceita.databinding.MealDetailActivityBinding
+import br.com.minhareceita.meal.domain.model.Meal
 import br.com.minhareceita.meal.presentation.MealsRecyclerAdapter
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class MealDetailsActivity : AppCompatActivity() {
 
     private fun initProperties() {
         supportActionBar?.hide()
+        viewModel.mealId = intent.getStringExtra(MealsRecyclerAdapter.TAG).toString()
         binding.apply {
             ingredientsList.layoutManager =
                 LinearLayoutManager(this@MealDetailsActivity, LinearLayoutManager.VERTICAL, false)
@@ -48,19 +50,22 @@ class MealDetailsActivity : AppCompatActivity() {
     }
 
     private fun fillMealDetails() {
-        viewModel.mealId = intent.getStringExtra(MealsRecyclerAdapter.TAG).toString()
         viewModel.mealDetails.observe(this@MealDetailsActivity) { meal ->
-            meal.meals[0].apply {
-                Glide.with(this@MealDetailsActivity).load(image).into(binding.mealImage)
-                binding.prepare.text = instructions
-                binding.area.text = getString(R.string.txt_area) + area
-                binding.mealTitle.text = name
-                youtube?.apply {
-                    binding.youtubeButton.visibility = View.VISIBLE
-                    youtubeUri = this
-                }
-                adapter.updateList(details())
+            bindingValues(meal)
+        }
+    }
+
+    private fun bindingValues(meal: Meal) {
+        binding.apply {
+            Glide.with(this@MealDetailsActivity).load(meal.image).into(mealImage)
+            prepare.text = meal.instructions
+            area.text = getString(R.string.txt_area) + meal.area
+            mealTitle.text = meal.name
+            meal.youtube?.let {
+                youtubeButton.visibility = View.VISIBLE
+                youtubeUri = it
             }
+            adapter.updateList(meal.details())
         }
     }
 }

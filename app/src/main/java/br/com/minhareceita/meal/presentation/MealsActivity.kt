@@ -28,6 +28,7 @@ class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private fun initProperties() {
         supportActionBar?.hide()
         adapter = MealsRecyclerAdapter(this)
+        viewModel.category = intent.getStringExtra(MealCategoryRecyclerAdapter.TAG).toString()
         binding.apply {
             backButton.visibility = View.VISIBLE
             backButton.setOnClickListener {
@@ -43,11 +44,8 @@ class MealsActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onResume() {
         super.onResume()
-        viewModel.apply {
-            mealsName = intent.getStringExtra(MealCategoryRecyclerAdapter.TAG).toString()
-            meals.observe(this@MealsActivity) { list ->
-                adapter.updateList(list)
-            }
+        viewModel.meals.observe(this@MealsActivity) {
+            adapter.updateList(it)
         }
     }
 

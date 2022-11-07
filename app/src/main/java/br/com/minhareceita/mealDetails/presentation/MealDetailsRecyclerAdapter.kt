@@ -10,7 +10,7 @@ import br.com.minhareceita.R
 
 class MealDetailsRecyclerAdapter: Adapter<MealDetailsRecyclerAdapter.ViewHolder>() {
 
-    private var meal: ArrayList<String?> = arrayListOf()
+    private var meal = arrayListOf<String?>()
 
     fun updateList(list: List<String?>) {
         list.forEach {

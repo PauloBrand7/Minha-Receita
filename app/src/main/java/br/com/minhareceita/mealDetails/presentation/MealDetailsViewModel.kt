@@ -17,7 +17,7 @@ class MealDetailsViewModel @Inject constructor(
 ): ViewModel() {
 
     var mealId = ""
-    val mealDetails: MutableLiveData<MealsResponse> = MutableLiveData()
+    val mealDetails = MutableLiveData<Meal>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

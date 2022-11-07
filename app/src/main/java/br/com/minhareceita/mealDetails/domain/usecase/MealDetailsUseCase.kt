@@ -8,7 +8,7 @@ import javax.inject.Inject
 class MealDetailsUseCase @Inject constructor(
     private val repository: MealDetailsRepository
 ) {
-    suspend fun getMealById(recipeId: String): MealsResponse {
-        return repository.getMealDetail(recipeId)
+    suspend fun getMealById(recipeId: String): Meal? {
+        return repository.getMealDetail(recipeId).meals.takeIf { it.isNotEmpty() }?.let { it[0] }
     }
 }
