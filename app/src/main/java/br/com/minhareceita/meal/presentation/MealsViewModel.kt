@@ -7,6 +7,7 @@ import br.com.minhareceita.meal.domain.model.Meal
 import br.com.minhareceita.meal.domain.usecase.MealsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class MealsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
+            delay(500)
             _meals = useCase.getMealsByCategoryName(category)
             meals.postValue(_meals)
         }

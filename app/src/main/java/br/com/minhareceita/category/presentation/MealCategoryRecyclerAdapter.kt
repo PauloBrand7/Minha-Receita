@@ -1,26 +1,16 @@
 package br.com.minhareceita.category.presentation
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.minhareceita.R
 import br.com.minhareceita.category.domain.model.MealCategory
-import br.com.minhareceita.meal.presentation.MealsActivity
 import com.bumptech.glide.Glide
 
-class MealCategoryRecyclerAdapter(
-    private val context: Context
-) : Adapter<MealCategoryRecyclerAdapter.ViewHolder>(), Filterable {
+class MealCategoryRecyclerAdapter : Adapter<MealCategoryRecyclerAdapter.ViewHolder>(), SearchView.OnQueryTextListener ,Filterable {
 
     companion object {
         const val TAG = "CATEGORYNAME"
@@ -28,6 +18,11 @@ class MealCategoryRecyclerAdapter(
 
     private var categories = listOf<MealCategory>()
     private var filteredCategories: List<MealCategory> = listOf()
+    private var onItemClickListener: ((String) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (String) -> Unit) {
+        onItemClickListener = listener
+    }
 
     fun updateList(list: List<MealCategory>) {
         filteredCategories = list
@@ -45,14 +40,25 @@ class MealCategoryRecyclerAdapter(
             Glide.with(holder.itemView).load(image).into(holder.categoryImage)
             holder.categoryName.text = categoryName
             holder.itemView.setOnClickListener {
-                val intent = Intent(context, MealsActivity::class.java)
-                intent.putExtra(TAG, categoryName)
-                startActivity(context, intent, Bundle())
+                onItemClickListener?.let {
+                    it(categoryName)
+                }
             }
         }
     }
 
     override fun getItemCount(): Int = filteredCategories.size
+
+    override fun onQueryTextSubmit(searchWord: String?): Boolean {
+        this.filter.filter(searchWord)
+        return false
+    }
+
+    override fun onQueryTextChange(searchWord: String?): Boolean {
+        this.filter.filter(searchWord)
+        return false
+    }
+
 
     override fun getFilter(): Filter {
 

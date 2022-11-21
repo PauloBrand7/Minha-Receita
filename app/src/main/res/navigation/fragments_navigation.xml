@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_category_fragment">
+
+    <fragment
+        android:id="@+id/nav_category_fragment"
+        android:name="br.com.minhareceita.category.presentation.MealCategoryFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_category">
+
+        <action
+            android:id="@+id/nav_to_meal"
+            app:destination="@id/nav_meal_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_meal_fragment"
+        android:name="br.com.minhareceita.meal.presentation.MealsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_meal">
+
+        <action
+            android:id="@+id/nav_to_meal_detail"
+            app:destination="@+id/nav_meal_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_meal_detail"
+        android:name="br.com.minhareceita.mealDetails.presentation.MealDetailsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_meal_detail" />
+
+</navigation>

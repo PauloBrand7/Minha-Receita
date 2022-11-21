@@ -1,10 +1,9 @@
 package br.com.minhareceita.core
 
 import br.com.minhareceita.meal.domain.model.Meal
-import java.lang.StringBuilder
 
 fun Meal.details(): ArrayList<String?> {
-    return arrayListOf(
+    val mealDetails = arrayListOf(
         measure1.concatMeasure(ingredient1),
         measure2.concatMeasure(ingredient2),
         measure3.concatMeasure(ingredient3),
@@ -26,11 +25,13 @@ fun Meal.details(): ArrayList<String?> {
         measure19.concatMeasure(ingredient19),
         measure20.concatMeasure(ingredient20)
     )
+    mealDetails.filterNotNull()
+    return mealDetails
 }
 
 fun String?.concatMeasure(ingredient: String?): String? {
     takeIf { (!this.isNullOrEmpty() && !ingredient.isNullOrEmpty()) }?.let {
-        return "- $this $ingredient"
+        return "$ingredient.$this"
     }
     return null
 }

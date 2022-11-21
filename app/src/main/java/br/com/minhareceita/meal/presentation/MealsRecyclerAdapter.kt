@@ -1,8 +1,5 @@
 package br.com.minhareceita.meal.presentation
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +7,15 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import br.com.minhareceita.R
 import br.com.minhareceita.meal.domain.model.Meal
-import br.com.minhareceita.mealDetails.presentation.MealDetailsActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 
-class MealsRecyclerAdapter(
-    private val context: Context
-) : Adapter<MealsRecyclerAdapter.ViewHolder>(), Filterable {
+class MealsRecyclerAdapter : Adapter<MealsRecyclerAdapter.ViewHolder>(), Filterable {
 
     companion object {
         const val TAG = "RECIPEID"
@@ -28,6 +23,11 @@ class MealsRecyclerAdapter(
 
     private var meals = listOf<Meal>()
     private var filteredMeals = listOf<Meal>()
+    private var onItemClickListener: ((String) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (String) -> Unit) {
+        onItemClickListener = listener
+    }
 
     fun updateList(list: List<Meal>) {
         filteredMeals = list
@@ -37,17 +37,17 @@ class MealsRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_meal, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         filteredMeals[position].apply {
-            Glide.with(holder.itemView).load(image).into(holder.categoryImage)
-            holder.categoryName.text = name
+            Glide.with(holder.itemView).load(image).into(holder.mealImage)
+            holder.mealName.text = name
             holder.itemView.setOnClickListener {
-                val intent = Intent(context, MealDetailsActivity::class.java)
-                intent.putExtra(TAG, id)
-                startActivity(context, intent, Bundle())
+                onItemClickListener?.let {
+                    it(id)
+                }
             }
         }
     }
@@ -72,14 +72,14 @@ class MealsRecyclerAdapter(
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredMeals = results?.values?.let { it as List<Meal>} ?: meals
+                filteredMeals = results?.values?.let { it as List<Meal> } ?: meals
                 notifyDataSetChanged()
             }
         }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val categoryName: TextView = view.findViewById(R.id.category_name)
-        val categoryImage: ImageView = view.findViewById(R.id.category_image)
+        val mealName: TextView = view.findViewById(R.id.meal_name)
+        val mealImage: ImageView = view.findViewById(R.id.meal_image)
     }
 }

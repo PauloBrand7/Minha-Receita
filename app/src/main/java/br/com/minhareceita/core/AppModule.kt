@@ -1,7 +1,6 @@
 package br.com.minhareceita.core
 
 import br.com.minhareceita.BuildConfig
-import br.com.minhareceita.category.data.api.MealCategoryAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
