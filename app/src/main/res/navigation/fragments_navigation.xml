@@ -32,4 +32,10 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_meal_detail" />
 
+    <fragment
+        android:id="@+id/nav_network_error"
+        android:name="br.com.minhareceita.core.NetworkErrorFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_network_error" />
+
 </navigation>

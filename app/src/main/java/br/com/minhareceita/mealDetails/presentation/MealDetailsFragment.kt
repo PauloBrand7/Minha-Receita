@@ -11,12 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.minhareceita.R
 import br.com.minhareceita.core.details
+import br.com.minhareceita.core.navToNetworkErrorFragment
 import br.com.minhareceita.databinding.FragmentMealDetailBinding
 import br.com.minhareceita.meal.domain.model.Meal
 import br.com.minhareceita.meal.presentation.MealsRecyclerAdapter
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class MealDetailsFragment : Fragment() {
@@ -38,6 +38,7 @@ class MealDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkInternetNetwork(view)
         fillMealDetails()
     }
 
@@ -62,6 +63,12 @@ class MealDetailsFragment : Fragment() {
         viewModel.mealDetails.observe(viewLifecycleOwner) { meal ->
             bindingValues(meal)
             adapter.updateList(meal.details())
+        }
+    }
+
+    private fun checkInternetNetwork(view: View) {
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            view.navToNetworkErrorFragment()
         }
     }
 

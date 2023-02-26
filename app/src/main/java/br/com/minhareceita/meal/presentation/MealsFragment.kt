@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.minhareceita.R
 import br.com.minhareceita.category.presentation.MealCategoryRecyclerAdapter
+import br.com.minhareceita.core.navToNetworkErrorFragment
 import br.com.minhareceita.databinding.FragmentMealBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +35,7 @@ class MealsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkInternetNetwork(view)
         fillsList()
         navToMealDetailFragment(view)
     }
@@ -60,6 +62,12 @@ class MealsFragment : Fragment() {
     private fun fillsList() {
         viewModel.meals.observe(viewLifecycleOwner) {
             adapter.updateList(it)
+        }
+    }
+
+    private fun checkInternetNetwork(view: View) {
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            view.navToNetworkErrorFragment()
         }
     }
 

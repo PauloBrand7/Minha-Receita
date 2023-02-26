@@ -3,11 +3,12 @@ package br.com.minhareceita.meal.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.minhareceita.core.NetworkCallback
 import br.com.minhareceita.meal.domain.model.Meal
+import br.com.minhareceita.meal.domain.model.MealsResponse
 import br.com.minhareceita.meal.domain.usecase.MealsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,13 +19,19 @@ class MealsViewModel @Inject constructor(
 
     var category = ""
     val meals = MutableLiveData<List<Meal>>()
-    private var _meals = listOf<Meal>()
+    val errorMessage = MutableLiveData<String>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            delay(500)
-            _meals = useCase.getMealsByCategoryName(category)
-            meals.postValue(_meals)
+            useCase.getMealsByCategoryName(category, object : NetworkCallback<MealsResponse> {
+                override fun onSuccess(response: MealsResponse) {
+                    meals.postValue(response.meals)
+                }
+
+                override fun onError(t: Throwable) {
+                    errorMessage.postValue(t.message)
+                }
+            })
         }
     }
 }

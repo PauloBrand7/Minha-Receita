@@ -59,7 +59,6 @@ class MealCategoryRecyclerAdapter : Adapter<MealCategoryRecyclerAdapter.ViewHold
         return false
     }
 
-
     override fun getFilter(): Filter {
 
         return object : Filter() {

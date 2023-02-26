@@ -60,6 +60,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_meal_detail -> {
                     binding.search.visibility = View.GONE
                 }
+                R.id.nav_network_error -> {
+                    binding.backButton.visibility = View.GONE
+                    binding.search.visibility = View.GONE
+                }
             }
         }
     }

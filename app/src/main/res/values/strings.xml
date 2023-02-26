@@ -8,4 +8,5 @@
     <string name="txt_area">Região: </string>
     <string name="txt_modo_de_preparo">Modo de Preparo:</string>
     <string name="txt_network_error">Conexão com a internet indisponível. Verifique sua rede e tente novamente!</string>
+    <string name="btn_try_again">Tentar novamente</string>
 </resources>

@@ -1,5 +1,8 @@
 package br.com.minhareceita.core
 
+import android.view.View
+import androidx.navigation.findNavController
+import br.com.minhareceita.R
 import br.com.minhareceita.meal.domain.model.Meal
 
 fun Meal.details(): ArrayList<String?> {
@@ -34,4 +37,8 @@ fun String?.concatMeasure(ingredient: String?): String? {
         return "$ingredient.$this"
     }
     return null
+}
+
+fun View.navToNetworkErrorFragment() {
+    findNavController().navigate(R.id.nav_network_error)
 }
