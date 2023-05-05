@@ -2,22 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.minhareceita">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:name=".MinhasReceitasApplication"
+        android:icon="@drawable/ic_food"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_food"
         android:supportsRtl="true"
         android:theme="@style/Theme.MinhaReceita">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".core.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
