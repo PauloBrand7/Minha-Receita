@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.minhareceita.R
 import br.com.minhareceita.category.presentation.MealCategoryRecyclerAdapter
+import br.com.minhareceita.core.MainActivity
 import br.com.minhareceita.core.navToNetworkErrorFragment
 import br.com.minhareceita.databinding.FragmentMealBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +23,7 @@ class MealsFragment : Fragment() {
     private val viewModel: MealsViewModel by viewModels()
     private lateinit var binding: FragmentMealBinding
     private lateinit var adapter: MealsRecyclerAdapter
+    private lateinit var mainActivity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +31,7 @@ class MealsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMealBinding.inflate(layoutInflater)
+        mainActivity = activity as MainActivity
         setupExtras()
         setupRecyclerView()
         return binding.root
@@ -38,6 +42,17 @@ class MealsFragment : Fragment() {
         checkInternetNetwork(view)
         fillsList()
         navToMealDetailFragment(view)
+        mainActivity.getSearchBar().setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
     }
 
     private fun setupExtras() {

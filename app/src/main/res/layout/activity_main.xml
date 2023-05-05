@@ -33,14 +33,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/title_appbar"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/search"/>
+                    app:layout_constraintBottom_toTopOf="@id/search"
+                    android:contentDescription="@string/test" />
 
                 <TextView
                     android:id="@+id/title_appbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/alex_brush"
                     android:text="@string/title_minha_receita"
                     android:textSize="45sp"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -3,7 +3,6 @@ package br.com.minhareceita.core
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import br.com.minhareceita.R
 import br.com.minhareceita.databinding.ActivityMainBinding
@@ -34,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupActionBar() {
         supportActionBar?.apply {
             setDisplayShowTitleEnabled(false)
-            setDefaultDisplayHomeAsUpEnabled(false)
         }
         binding.backButton.setOnClickListener {
             navFragment.navController.popBackStack()
@@ -47,22 +45,28 @@ class MainActivity : AppCompatActivity() {
         navFragment.navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.nav_category_fragment -> {
-                    binding.backButton.visibility = View.GONE
-                    binding.search.queryHint = getString(R.string.search_categories_text)
-//                binding.search.setOnQueryTextListener()
+                    binding.apply {
+                        backButton.visibility = View.GONE
+                        search.queryHint = getString(R.string.search_categories_text)
+                        search.setQuery("",false)
+                    }
                 }
                 R.id.nav_meal_fragment -> {
-                    binding.backButton.visibility = View.VISIBLE
-                    binding.search.visibility = View.VISIBLE
-                    binding.search.queryHint = getString(R.string.search_meals_text)
-//                binding.search.setOnQueryTextListener()
+                    binding.apply {
+                        backButton.visibility = View.VISIBLE
+                        search.visibility = View.VISIBLE
+                        search.queryHint = getString(R.string.search_meals_text)
+                        search.setQuery("",false)
+                    }
                 }
                 R.id.nav_meal_detail -> {
                     binding.search.visibility = View.GONE
                 }
                 R.id.nav_network_error -> {
-                    binding.backButton.visibility = View.GONE
-                    binding.search.visibility = View.GONE
+                    binding.apply {
+                        backButton.visibility = View.GONE
+                        search.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -75,4 +79,6 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+    fun getSearchBar() = binding.search
 }
